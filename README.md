@@ -1,21 +1,15 @@
-# Udacity - Linux Server Configuration Project
+# Linux Server Configuration Project
 
-An Udacity Full Stack Web Developer II Nanodegree Project.
+Udacity Linux Server Configuration Project.
 
-## About
+### Access Information
 
-This tutorial will guide you through the steps to take a baseline installation of a Linux server and prepare it to host your Web applications. You will then secure your server from a number of attack vectors, install and configure a database server, and deploy one of your existing Flask-based Web applications onto it.
-
-In this project, I have set up an Ubuntu 18.04 image on a DigitalOcean droplet. The technical details of the server as well as the steps that have been taken to set it up can be found in the succeeding sections.
-
-### Technical Information About the Project
-
-- **Server IP Address:** 206.189.151.124
+- **Server IP Address:** 52.91.108.97
 - **SSH server access port:** 2200
 - **SSH login username:** grader
-- **Application URL:** http://206.189.151.124.xip.io
+- **Application Domain:** http://www.fitnesssupplements.info
 
-## Table of Contents
+## Index
 
 <!-- TOC -->
 
