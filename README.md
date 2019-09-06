@@ -20,7 +20,7 @@ Udacity Linux Server Configuration Project.
 
 On amazon lightsail, download the ssh key server access to your computer in order to use your own terminal and manage the server using the username and public ip provided.
 
-   ```console
+   ```
    Public IP: 52.91.108.97
    Username: Ubuntu
    Access:
@@ -31,7 +31,7 @@ On amazon lightsail, download the ssh key server access to your computer in orde
 
 Using the default sudo user execute the following commands:
 
-   ```console
+   ```
   $ sudo apt-get update
   $ sudo apt-get upgrade
    ```
@@ -40,13 +40,13 @@ Using the default sudo user execute the following commands:
 
 Access to the SSH configuration file, change the port line from 22 to 2200 and restart the service:
 
-   ```console
+   ```
   $ sudo nano /etc/ssh/sshd_config
   $ service sshd restart
    ```
 ##### IMPORTANT INFORMATION: You could lose the access to the server, follow step 2 adding the new port (-p 2200):
 
-  ```console
+  ```
   ssh ubuntu@52.91.108.97 -p 2200 -i <Local machine Key path>
    ```
 
@@ -54,7 +54,7 @@ Access to the SSH configuration file, change the port line from 22 to 2200 and r
 
 Make ports 2200, 80 and 123 the only incoming connections:
 
-   ```console
+   ```
   $ sudo ufw default deny incoming
   $ sudo ufw allow 2200/tcp
   $ sudo ufw allow 80/tcp
@@ -66,7 +66,7 @@ Make ports 2200, 80 and 123 the only incoming connections:
 
 Create a new user called "grader":
 
-   ```console
+   ```
    $ sudo adduser grader
    ```
 
@@ -103,7 +103,7 @@ The terminal will ask you for a passphrase which can be typed or leave empty.
 
 Add the path where you would like to save the new key.
 
-  ```console
+  ```
     Enter file in which to save the key (/some/path/): /your/path/filename
    ```
 
@@ -111,7 +111,7 @@ Public and private keys will be generated, the public key will have the file nam
 
 Once the file was created we need to access our Ubuntu server to save the generated public key on the home directory:
 
-  ```console
+  ```
     $ sudo mkdir /home/.ssh
     $ sudo touch /home/.ssh/authorized_keys # Create a new file to store our public key
     $ sudo nano /home/.ssh/authorized_keys # Add public key content and save
@@ -121,14 +121,14 @@ Once the file was created we need to access our Ubuntu server to save the genera
 
 Now we are able to login using the generated key
 
- ```console
+ ```
   ssh grade@52.91.108.97 -p 2200 -i <Local machine Key path>
    ```
 ### 8. Change server time zone
 
 To change the server time zone to UTC we need to run the following command and use the GUI:
 
-  ```console
+  ```
     $ sudo dpkg-reconfigure tzdata
    ```
 
@@ -136,7 +136,7 @@ To change the server time zone to UTC we need to run the following command and u
 
 To deploy our Python project we need to install Apache 2 and mod_wsgi:
 
-  ```console
+  ```
     $ sudo apt-get install apache2 # Install Apache 2
     $ sudo apt-get install libapache2-mod-wsgi-py3 # Install mod_wsgi to publish python 3 apps
     $ sudo a2enmod wsgi # Enable mod_wsgi 
@@ -147,7 +147,7 @@ Download your project from GitHub or other resource on the path /var/www/
 
 We need to create a new .wsgi file in your project path:
 
-  ```console
+  ```
     $ sudo echo /your/project/path/<ProjectMainScript>.wsgi
     $ sudo nano /your/project/path/<ProjectMainScript>.wsgi 
       -Add the following lines:
@@ -161,7 +161,7 @@ We need to create a new .wsgi file in your project path:
    ```
 We need to set up the apache configuration file to make mod_wsgi work:
 
-  ```console
+  ```
     $ sudo nano /etc/apache2/sites-enabled/000-default.conf
       -Add the following lines between <VirtualHost *:80> </VirtualHost> tags:
          WSGIDaemonProcess FitnessSupplementsApp python-path=/your/project/path
@@ -172,7 +172,7 @@ Once everything is setup you should be able to see your project running when you
 
 ##### IMPORTANT INFORMATION: In case your project is not loading check the apache errors.log to verify the problem:
 
-  ```console
+  ```
     $ sudo cat /var/log/apache2/error.log
    ```
 
@@ -181,7 +181,7 @@ Once everything is setup you should be able to see your project running when you
 
 Once your application is running we need to install postgres database:
 
-  ```console
+  ```
     $ sudo apt-get install postgresql
     $ su - postgres # Log into postgres
    ```
@@ -192,12 +192,12 @@ You have to change your project database connections:
 
 We need to create a new .wsgi file in your project path:
 
-  ```console
+  ```
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<DB Username>:<DB Password>@localhost/<DB Name>'    
    ```
 In case you don't have a database_setup script in your project you must create the database manually:
 
-  ```console
+  ```
     $ su - postgres # Log into postgres
     $ psql 
     $ CREATE DATABASE dbname;
