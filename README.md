@@ -74,7 +74,7 @@ Create a new user called "grader":
 
 Give the user "grader" sudo privileges, adding it to the sudoers.d directory
 
-  ```console
+  ```
    $ sudo echo /etc/sudoers.d/grader # We create a new file for the user
    $ sudo nano /etc/sudoers.d/grader # We open file deitor
       - Add the following lines to the grader file and save it:
@@ -83,12 +83,20 @@ Give the user "grader" sudo privileges, adding it to the sudoers.d directory
            grader ALL=(ALL) NOPASSWD:ALL
    $ sudo su grader # Login using grader and test a sudo command
    ```
+For security is recommended to block the user root:
+
+   ```
+    $ sudo nano /etc/ssh/sshd_config
+       - Modify the following line to "no":
+           PermitRootLogin no
+   ```
+
 
 ### 7. Create a SSH Key to access the server
 
 From a local machine open a terminal and generate a new SSH key:
 
-  ```console
+  ```
     ssh-keygen
    ```
 The terminal will ask you for a passphrase which can be typed or leave empty.
