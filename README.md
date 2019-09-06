@@ -7,6 +7,7 @@ Udacity Linux Server Configuration Project.
 - **Server IP Address:** 52.91.108.97
 - **SSH server access port:** 2200
 - **SSH login username:** grader
+- **Instance Host:** Amazon Lightsile
 - **Application Domain:** http://www.fitnesssupplements.info
 
 
